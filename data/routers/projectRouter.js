@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
         .catch(error =>
             res.status(500).json(error))
 });
-
+//can be used with React 
 router.get('/', (req, res) => {
     postModel
         .get()
