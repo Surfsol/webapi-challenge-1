@@ -12,3 +12,33 @@ I need this code, just don't know where, perhaps should make some middleware, do
 
 Go code!
 */
+const express = require('express');
+
+//creates instant of express server - object
+//create server that can listen 
+const server = express()  
+
+const actionRouter = require('./data/routers/actionRouter')
+const projectRouter = require('./data/routers/projectRouter')
+
+//middleware that hides headers
+const helmet = require('helmet')
+
+
+server.use(helmet())
+
+//allows express to read json from body of request
+//takes json coming from body
+server.use(express.json())
+
+server.use('/project', projectRouter)
+server.use('/action', actionRouter)
+
+server.get('/', (req, res) => {
+    res.send(`<h2>Its alive!</h2>`)
+})
+
+
+server.listen(5000, () => {
+    console.log('\n* Server Running on http://localhost:5000 *\n')
+})
